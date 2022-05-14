@@ -1,23 +1,24 @@
-package com.m1p9.kidz.service;
+package com.m1p9.kidz.model;
 
-import java.io.Serializable;
+public class User {
 
-public class LoginResponse implements Serializable {
     private String id;
     private String uName;
     private String uUsername;
     private String uEmail;
     private String uPassword;
-    public LoginResponse(){
+
+    public User(){
 
     }
-    public LoginResponse(String id, String uName, String uUsername, String uEmail, String uPassword) {
+    public User(String id, String uName, String uUsername, String uEmail, String uPassword) {
         this.id = id;
         this.uName = uName;
         this.uUsername = uUsername;
         this.uEmail = uEmail;
         this.uPassword = uPassword;
     }
+
 
 
 
@@ -60,6 +61,7 @@ public class LoginResponse implements Serializable {
     public void setuPassword(String uPassword) {
         this.uPassword = uPassword;
     }
+
 
 
 }

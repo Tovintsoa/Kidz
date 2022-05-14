@@ -25,7 +25,9 @@ import android.widget.Toast;
 
 import com.m1p9.kidz.MainActivity;
 import com.m1p9.kidz.R;
+import com.m1p9.kidz.manager.SessionManagement;
 import com.m1p9.kidz.service.ApiClient;
+import com.m1p9.kidz.service.LoadingDialog;
 import com.m1p9.kidz.service.LoginRequest;
 import com.m1p9.kidz.service.LoginResponse;
 
@@ -42,9 +44,11 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     ProgressDialog progressDialog;
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        LoadingDialog loadingDialog = new LoadingDialog(LoginActivity.this);
 
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
@@ -53,7 +57,11 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                loadingDialog.startLoadingDialog();
+
                 if(TextUtils.isEmpty(username.getText().toString()) || TextUtils.isEmpty(password.getText().toString())){
+                    loadingDialog.dismissDialog();
                     String message = "Tout les champs sont obligatoires";
                     Toast.makeText(LoginActivity.this,message,Toast.LENGTH_LONG).show();
 
@@ -63,31 +71,49 @@ public class LoginActivity extends AppCompatActivity {
 
                     loginRequest.setUsername(username.getText().toString());
                     loginRequest.setPassword(password.getText().toString());
-                    loginUser(loginRequest);
+                    loginUser(loginRequest,loadingDialog);
+
                 }
             }
         });
     }
-    public void loginUser(LoginRequest loginRequest){
+    protected void onStart(){
+        super.onStart();
+        checkSession();
+    }
+    public void checkSession(){
+        SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
+        int userId = sessionManagement.getSession();
+        if(userId != -1){
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
+    }
+    public void loginUser(LoginRequest loginRequest,LoadingDialog loadingDialog){
         Call<LoginResponse> loginResponseCall = ApiClient.getService().loginUser(loginRequest);
         loginResponseCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(response.isSuccessful()){
                     LoginResponse loginResponse = response.body();
+
+                    SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
+                    sessionManagement.saveSession(loginResponse);
+                    loadingDialog.dismissDialog();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class).putExtra("data",loginResponse));
                     finish();
 
                 }
                 else{
-                    String message = "Une erreur est survenue. Reesaayer plutard";
+                    loadingDialog.dismissDialog();
+                    String message = "La combinaison adresse e-mail / mot de passe n'existe pas";
                     Toast.makeText(LoginActivity.this,message,Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                String message = "kiiii";
+                String message = "Une erreur est survenue. Essayez plutard";
                 Toast.makeText(LoginActivity.this,message,Toast.LENGTH_LONG).show();
             }
         });
