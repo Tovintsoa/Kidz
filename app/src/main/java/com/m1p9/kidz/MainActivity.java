@@ -13,6 +13,9 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -22,12 +25,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.m1p9.kidz.databinding.ActivityMainBinding;
 import com.m1p9.kidz.manager.SessionManagement;
+import com.m1p9.kidz.ui.gallery.GalleryFragment;
+import com.m1p9.kidz.ui.home.HomeFragment;
 import com.m1p9.kidz.ui.login.LoginActivity;
+import com.m1p9.kidz.ui.slideshow.SlideshowFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    private DrawerLayout mDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +52,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .setAction("Action", null).show();
             }
         });
-        DrawerLayout drawer = binding.drawerLayout;
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+       // DrawerLayout mdrawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,R.id.action_logout)
-                .setOpenableLayout(drawer)
+                .setOpenableLayout(mDrawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         setNavigationViewListener();
         changeMailHeader();
+
+
 
 
 
@@ -78,15 +88,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment = null;
+        Class fragmentClass;
+
         switch (item.getItemId()){
             case R.id.action_logout:{
                 logout();
                 return true;
             }
+            case R.id.nav_home:{
+                fragmentClass = HomeFragment.class;
+
+                break;
+            }
+            case R.id.nav_gallery:{
+                fragmentClass = GalleryFragment.class;
+                break;
+            }
+            case R.id.nav_slideshow:{
+                fragmentClass = SlideshowFragment.class;
+                break;
+            }
+            default:
+                fragmentClass = HomeFragment.class;
+
         }
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment);
+        fragmentManager.popBackStack();
+        fragmentTransaction.commit();
+        item.setChecked(true);
+        System.out.println("aaa");
+
+        // Set action bar title
+        getSupportActionBar().setTitle(item.getTitle());
+        // Close the navigation drawer
+        mDrawer.closeDrawers();
         return true;
     }
     private void logout() {
