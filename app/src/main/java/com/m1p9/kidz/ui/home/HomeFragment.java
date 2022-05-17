@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,20 +24,28 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
+      /*  homeViewModel =
+                new ViewModelProvider(this).get(HomeViewModel.class);*/
+        View view = inflater.inflate(R.layout.fragment_home,container,false);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        //View root = binding.getRoot();
+        String[] content = {"Try","Catch","finally"};
+        GridView grid = view.findViewById(R.id.favorisView);
+        System.out.print(grid);
+        ArrayAdapter<String> gridViewAdapter = new ArrayAdapter<String>(
+            getActivity(),
+            android.R.layout.simple_list_item_1,
+                content
+        );
+        grid.setAdapter(gridViewAdapter);
+        //final TextView textView = binding.textHome;
+       /* homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-        });
-        return root;
+        });*/
+        return view;
     }
 
     @Override
