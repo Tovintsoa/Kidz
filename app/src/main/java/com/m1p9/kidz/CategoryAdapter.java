@@ -46,6 +46,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 Intent intent = new Intent(context, VideoActivity.class);
 
                 Bundle bundle = new Bundle();
+                bundle.putString("id",category.getId());
                 bundle.putString("cName", category.getcName());
                 bundle.putString("cDescription", category.getcDescription());
                 bundle.putString("cImage", category.getcImage());
