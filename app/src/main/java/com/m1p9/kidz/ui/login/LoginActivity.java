@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
         int userId = sessionManagement.getSession();
         if(userId != -1){
-            startActivity(new Intent(LoginActivity.this, CategoryActivity.class));
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }
     }
@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
                     sessionManagement.saveSession(loginResponse);
                     loadingDialog.dismissDialog();
-                    startActivity(new Intent(LoginActivity.this, CategoryActivity.class).putExtra("data",loginResponse));
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class).putExtra("data",loginResponse));
                     finish();
 
                 }
