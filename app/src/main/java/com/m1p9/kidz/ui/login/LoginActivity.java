@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.m1p9.kidz.MainActivity;
+import com.m1p9.kidz.CategoryActivity;
 import com.m1p9.kidz.R;
 import com.m1p9.kidz.manager.SessionManagement;
 import com.m1p9.kidz.service.ApiClient;
@@ -85,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
         int userId = sessionManagement.getSession();
         if(userId != -1){
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, CategoryActivity.class));
             finish();
         }
     }
@@ -100,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     SessionManagement sessionManagement = new SessionManagement(LoginActivity.this);
                     sessionManagement.saveSession(loginResponse);
                     loadingDialog.dismissDialog();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class).putExtra("data",loginResponse));
+                    startActivity(new Intent(LoginActivity.this, CategoryActivity.class).putExtra("data",loginResponse));
                     finish();
 
                 }
