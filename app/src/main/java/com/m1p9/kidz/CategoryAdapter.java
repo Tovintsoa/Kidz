@@ -10,7 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,6 +27,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     private Context context;
     private List<Category> categoriesList;
+    private DrawerLayout mDrawer;
 
     public CategoryAdapter(Context context , List<Category> categories){
         this.context = context;
@@ -31,6 +37,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public CategoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item, parent, false);
+        mDrawer = (DrawerLayout) ((AppCompatActivity)context).findViewById(R.id.drawer_layout);
         return new CategoryHolder(view);
     }
 
@@ -40,10 +47,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.cName.setText(category.getcName().toString());
         holder.cDescription.setText(category.getcDescription().toString());
         Glide.with(context).load(category.getcImage()).into(holder.imageView);
+
+
+
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, VideoActivity.class);
+                /*Intent intent = new Intent(context, VideoActivity.class);
 
                 Bundle bundle = new Bundle();
                 bundle.putString("id",category.getId());
@@ -53,7 +63,33 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
                 intent.putExtras(bundle);
 
-                context.startActivity(intent);
+                context.startActivity(intent);*/
+
+
+
+
+
+                Class fragmentClass = VideoFragment.class;
+                Fragment fragment = null;
+                try {
+                    fragment = (Fragment) fragmentClass.newInstance();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("id",category.getId());
+                bundle.putString("cName", category.getcName());
+                bundle.putString("cDescription", category.getcDescription());
+                bundle.putString("cImage", category.getcImage());
+                fragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment);
+                fragmentManager.popBackStack();
+                fragmentTransaction.commit();
+                mDrawer.closeDrawers();
+
             }
         });
     }

@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentManager.popBackStack();
         fragmentTransaction.commit();
         item.setChecked(true);
-        System.out.println("aaa");
+
 
         // Set action bar title
         getSupportActionBar().setTitle(item.getTitle());
