@@ -41,11 +41,13 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
         Video video = videosList.get(position);
 
         //getLifecycle().addObserver(holder.youTubePlayerView);
+
         holder.youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 String videoId = video.getvUrl();
                 youTubePlayer.cueVideo(videoId,0);
+
             }
         });
         holder.vName.setText(video.getvName());

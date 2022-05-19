@@ -1,6 +1,7 @@
 package com.m1p9.kidz.ui.slideshow;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,9 @@ public class SlideshowFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textSlideshow;
+        textView.setText(Html.fromHtml(
+                "<p>This text is <b>bold</b> and uses HTML</p>" +
+                        "<p>This is <i>italic</i> .</p>"));
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

@@ -10,7 +10,9 @@ public class SlideshowViewModel extends ViewModel {
 
     public SlideshowViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+
+        mText.setValue("KIDZ Version 1.0. \n" +
+                " KIDZ est une plateforme d'éducation pour enfant à partir de vidéo séléctionné par nos professionnels. ");
     }
 
     public LiveData<String> getText() {

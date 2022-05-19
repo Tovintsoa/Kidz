@@ -24,6 +24,7 @@ import com.m1p9.kidz.databinding.FragmentHomeBinding;
 import com.m1p9.kidz.databinding.FragmentVideoBinding;
 import com.m1p9.kidz.model.Category;
 import com.m1p9.kidz.model.Video;
+import com.m1p9.kidz.service.LoadingDialog;
 import com.m1p9.kidz.ui.home.HomeViewModel;
 import com.m1p9.kidz.ui.home.VolleySingleton;
 
@@ -120,6 +121,8 @@ public class VideoFragment extends Fragment {
     }
     private void fetchVideos(String id){
         String url = "https://api-kids.herokuapp.com/video/allVideosByCategory/"+id;
+        LoadingDialog loadingDialog = new LoadingDialog(getActivity());
+        loadingDialog.startLoadingDialog();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,url,null , new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -136,7 +139,7 @@ public class VideoFragment extends Fragment {
                         e.printStackTrace();
                     }
                     VideoAdapter adapter = new VideoAdapter(getActivity(),videoList);
-
+                    loadingDialog.dismissDialog();
                     recyclerView.setAdapter(adapter);
 
                 }
@@ -144,6 +147,7 @@ public class VideoFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                loadingDialog.dismissDialog();
                 Toast.makeText(getActivity(), error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });

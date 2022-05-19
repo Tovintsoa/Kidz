@@ -21,9 +21,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.m1p9.kidz.CategoryActivity;
 import com.m1p9.kidz.CategoryAdapter;
+import com.m1p9.kidz.MainActivity;
 import com.m1p9.kidz.R;
 import com.m1p9.kidz.databinding.FragmentHomeBinding;
 import com.m1p9.kidz.model.Category;
+import com.m1p9.kidz.service.LoadingDialog;
+import com.m1p9.kidz.ui.login.LoginActivity;
 
 
 import org.json.JSONArray;
@@ -66,6 +69,8 @@ public class HomeFragment extends Fragment {
     }
     private void fetchCategories() {
         String url = "https://api-kids.herokuapp.com/category/allCategories";
+        LoadingDialog loadingDialog = new LoadingDialog(getActivity());
+        loadingDialog.startLoadingDialog();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -86,11 +91,13 @@ public class HomeFragment extends Fragment {
 
                     recyclerView.setAdapter(adapter);
                 }
+                loadingDialog.dismissDialog();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getActivity(), error.getMessage(),Toast.LENGTH_SHORT).show();
+                loadingDialog.dismissDialog();
             }
         });
         requestQueue.add(jsonArrayRequest);
