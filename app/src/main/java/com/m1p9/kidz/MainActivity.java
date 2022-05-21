@@ -30,7 +30,7 @@ import com.m1p9.kidz.ui.home.HomeFragment;
 import com.m1p9.kidz.ui.login.LoginActivity;
 import com.m1p9.kidz.ui.slideshow.SlideshowFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity/* implements NavigationView.OnNavigationItemSelectedListener*/{
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-       // DrawerLayout mdrawer = binding.drawerLayout;
+        // DrawerLayout mdrawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -64,10 +64,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        setNavigationViewListener();
+        //setNavigationViewListener();
         changeMailHeader();
 
-
+        NavigationView navigationView2 = findViewById(R.id.nav_view);
+        navigationView.getMenu().findItem(R.id.action_logout).setOnMenuItemClickListener(menuItem -> {
+            logout();
+            return true;
+        });
 
 
 
@@ -82,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    @Override
+
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
@@ -104,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return super.onOptionsItemSelected(item);
     }
-    @Override
+
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
         Class fragmentClass;
@@ -158,10 +162,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 
-    private void setNavigationViewListener() {
+    /*private void setNavigationViewListener() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
+    }*/
     private void changeMailHeader(){
         SessionManagement sessionManagement = new SessionManagement(MainActivity.this);
         System.out.println(sessionManagement.getUserSession());

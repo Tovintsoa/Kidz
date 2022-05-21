@@ -1,11 +1,15 @@
 package com.m1p9.kidz;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +43,13 @@ public class VideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#FF6200EE"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+        // Set BackgroundDrawable
 
         //ImageView imageView = findViewById(R.id.poster_image);
         //TextView cName = findViewById(R.id.mTitle);
@@ -55,7 +66,7 @@ public class VideoActivity extends AppCompatActivity {
         String mCName = bundle.getString("cName");
         String mCDescription = bundle.getString("cDescription");
         String mCImage = bundle.getString("cImage");
-
+        actionBar.setTitle(mCName);
         //Glide.with(this).load(mCImage).into(imageView);
         //cName.setText(mCName);
 //        getLifecycle().addObserver(ytb);

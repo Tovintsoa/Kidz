@@ -16,9 +16,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.m1p9.kidz.databinding.ActivityMainBinding;
 import com.m1p9.kidz.model.Category;
 
 import java.util.List;
@@ -28,6 +30,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private Context context;
     private List<Category> categoriesList;
     private DrawerLayout mDrawer;
+
+    private AppBarConfiguration mAppBarConfiguration;
+    private ActivityMainBinding binding;
+
 
     public CategoryAdapter(Context context , List<Category> categories){
         this.context = context;
@@ -48,12 +54,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.cDescription.setText(category.getcDescription().toString());
         Glide.with(context).load(category.getcImage()).into(holder.imageView);
 
+       /* LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        binding = ActivityMainBinding.inflate(li);*/
+        //context.setContentView(binding.getRoot());
 
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(context, VideoActivity.class);
+                Intent intent = new Intent(context, VideoActivity.class);
 
                 Bundle bundle = new Bundle();
                 bundle.putString("id",category.getId());
@@ -63,13 +72,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
                 intent.putExtras(bundle);
 
-                context.startActivity(intent);*/
+                context.startActivity(intent);
 
 
 
 
 
-                Class fragmentClass = VideoFragment.class;
+                /*Class fragmentClass = VideoFragment.class;
                 Fragment fragment = null;
                 try {
                     fragment = (Fragment) fragmentClass.newInstance();
@@ -88,7 +97,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 fragmentTransaction.replace(R.id.nav_host_fragment_content_main, fragment);
                 fragmentManager.popBackStack();
                 fragmentTransaction.commit();
-                mDrawer.closeDrawers();
+                mDrawer.closeDrawers();*/
 
             }
         });

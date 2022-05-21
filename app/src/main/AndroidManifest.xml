@@ -16,11 +16,13 @@
             android:exported="false" />
         <activity
             android:name=".VideoActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
-            android:exported="true"
-            android:label="@string/title_activity_settings" />
+            android:parentActivityName=".MainActivity"
+            android:exported="false"
+            />
         <activity
             android:name=".MainActivity"
             android:exported="true"
