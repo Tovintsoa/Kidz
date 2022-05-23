@@ -25,6 +25,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Paramètre</string>
+    <string name="inscription_title">Inscription</string>
     <string name="recherche">Recherche</string>
 
     <string name="menu_home">Catégories</string>
@@ -53,6 +54,12 @@
     <string name="notificaton_channel_id">channelID</string>
     <string name="notification_channel_title">channelTitle</string>
     <string name="notification_channe_desc">channelDescription</string>
+    <string name="nom_et_prenom">Nom et prénom</string>
+    <string name="login">Login</string>
+    <string name="mail">Email</string>
+    <string name="motdepasse">Mot de passe</string>
+    <string name="motdepasse2">Retaper le mot de passe</string>
+    <string name="s_inscrire">S\'inscrire</string>
 
 
 </resources>

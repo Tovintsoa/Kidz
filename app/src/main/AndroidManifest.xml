@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Kidz">
         <activity
             android:name=".ui.registration.RegistrationActivity"
+            android:parentActivityName=".ui.login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".CategoryActivity"
