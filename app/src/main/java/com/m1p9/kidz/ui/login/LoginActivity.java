@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.m1p9.kidz.MainActivity;
@@ -31,6 +32,7 @@ import com.m1p9.kidz.service.ApiClient;
 import com.m1p9.kidz.service.LoadingDialog;
 import com.m1p9.kidz.service.LoginRequest;
 import com.m1p9.kidz.service.LoginResponse;
+import com.m1p9.kidz.ui.registration.RegistrationActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
     private Button login;
+    private Button inscription;
     ProgressDialog progressDialog;
 
 
@@ -54,6 +57,9 @@ public class LoginActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         login = (Button) findViewById(R.id.login);
+        inscription =(Button) findViewById(R.id.inscription);
+        //inscription = (TextView) findViewById(R.id.inscription);
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +81,12 @@ public class LoginActivity extends AppCompatActivity {
                     loginUser(loginRequest,loadingDialog);
 
                 }
+            }
+        });
+        inscription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
             }
         });
     }
