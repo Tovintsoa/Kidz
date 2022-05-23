@@ -18,6 +18,13 @@ public class User {
         this.uEmail = uEmail;
         this.uPassword = uPassword;
     }
+    public User( String uName, String uUsername, String uEmail, String uPassword) {
+
+        this.uName = uName;
+        this.uUsername = uUsername;
+        this.uEmail = uEmail;
+        this.uPassword = uPassword;
+    }
 
 
 

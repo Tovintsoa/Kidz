@@ -29,7 +29,7 @@
     <string name="recherche">Recherche</string>
 
     <string name="menu_home">Catégories</string>
-    <string name="menu_gallery">Favoris</string>
+    <string name="menu_gallery">Les vidéos</string>
     <string name="menu_slideshow">A propos de nous</string>
 
     <string name="menu_logout">Déconnexion</string>
@@ -60,6 +60,7 @@
     <string name="motdepasse">Mot de passe</string>
     <string name="motdepasse2">Retaper le mot de passe</string>
     <string name="s_inscrire">S\'inscrire</string>
+    <string name="rechercher_une_video">Rechercher une vidéo</string>
 
 
 </resources>

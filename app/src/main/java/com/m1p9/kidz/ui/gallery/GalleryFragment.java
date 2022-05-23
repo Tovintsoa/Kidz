@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.m1p9.kidz.CategoryAdapter;
+import com.m1p9.kidz.MainActivity;
 import com.m1p9.kidz.R;
 import com.m1p9.kidz.VideoAdapter;
 import com.m1p9.kidz.databinding.FragmentGalleryBinding;
@@ -31,6 +32,7 @@ import com.m1p9.kidz.model.Category;
 import com.m1p9.kidz.model.Video;
 import com.m1p9.kidz.service.LoadingDialog;
 import com.m1p9.kidz.ui.home.VolleySingleton;
+import com.m1p9.kidz.ui.registration.RegistrationActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
