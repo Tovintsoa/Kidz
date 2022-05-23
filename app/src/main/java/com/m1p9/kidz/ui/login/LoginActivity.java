@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
     private Button login;
     private Button inscription;
-    ProgressDialog progressDialog;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +57,8 @@ public class LoginActivity extends AppCompatActivity {
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         login = (Button) findViewById(R.id.login);
-        inscription =(Button) findViewById(R.id.inscription);
-        //inscription = (TextView) findViewById(R.id.inscription);
+       inscription = (Button) findViewById(R.id.inscription);
+
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        System.out.println("salut");
+        System.out.println(inscription);
         inscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
