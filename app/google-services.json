@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "69423724132",
+    "project_id": "kidz-afb54",
+    "storage_bucket": "kidz-afb54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69423724132:android:ced617759745ac792b9171",
+        "android_client_info": {
+          "package_name": "com.m1p9.kidz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69423724132-nf8d4v1h1j98lvff6jfk4dlltu39u4jj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtbG-1pS6YAtBVqcJfZfORGBhD320LP_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69423724132-nf8d4v1h1j98lvff6jfk4dlltu39u4jj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

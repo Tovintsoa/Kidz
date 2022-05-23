@@ -2,6 +2,7 @@ package com.m1p9.kidz;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -23,6 +26,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.m1p9.kidz.databinding.ActivityMainBinding;
 import com.m1p9.kidz.manager.SessionManagement;
 import com.m1p9.kidz.ui.gallery.GalleryFragment;
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity/* implements NavigationView.
     private ActivityMainBinding binding;
     private DrawerLayout mDrawer;
 
+    private static final String TAG = "tokenTag";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +78,28 @@ public class MainActivity extends AppCompatActivity/* implements NavigationView.
             return true;
         });
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//        FirebaseMessaging.getInstance().getToken()
+//                .addOnCompleteListener(new OnCompleteListener<String>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<String> task) {
+//                        if (!task.isSuccessful()) {
+//                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+//                            return;
+//                        }
+//
+//                        // Get new FCM registration token
+//                        String token = task.getResult();
+//
+//                        // Log and toast
+//                        String msg =  token;
+//                        System.out.println(msg);
+//                        Log.d(TAG, msg);
+//                        Log.d(TAG,"token =" + msg);
+//                        //Toast.makeText(MainActivity.this,"token = "+ msg, Toast.LENGTH_LONG).show();
+//                    }
+//                });
 
     }
 

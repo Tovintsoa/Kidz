@@ -33,18 +33,6 @@
             android:gravity="center_horizontal|center_vertical">
 
 
-
-                <TextView
-                    android:id="@+id/vName"
-                    android:layout_width="350dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="movie"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/videoView"
-                    app:layout_constraintTop_toTopOf="parent" />
                 <!--ImageVIew to display our Course Image-->
                 <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                     android:id="@+id/videoView"
@@ -56,6 +44,20 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <!--Text View to display Course Name-->
+
+                <TextView
+                    android:id="@+id/vName"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="242dp"
+                    android:text="movie"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:paddingBottom="25dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/videoView"
+                    app:layout_constraintTop_toTopOf="parent" />
         </RelativeLayout>
 
 
