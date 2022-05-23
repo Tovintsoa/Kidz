@@ -1,6 +1,7 @@
 package com.m1p9.kidz;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuInflater;
@@ -25,6 +26,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.m1p9.kidz.databinding.ActivityMainBinding;
@@ -101,6 +103,11 @@ public class MainActivity extends AppCompatActivity/* implements NavigationView.
 //                    }
 //                });
 
+        //////////////////////////////////////////////////////////////////////////////////////////
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean setting =preferences.getBoolean("autoVideo",true);
+        //Toast.makeText(this,setting.toString(),Toast.LENGTH_LONG).show();
     }
 
     @Override

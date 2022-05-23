@@ -1,6 +1,7 @@
 package com.m1p9.kidz;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.m1p9.kidz.model.Video;
@@ -46,7 +48,14 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 String videoId = video.getvUrl();
-                youTubePlayer.cueVideo(videoId,0);
+
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+                Boolean setting =preferences.getBoolean("autoVideo",true);
+                if(setting == true){
+                    youTubePlayer.loadVideo(videoId,0);
+                }else{
+                    youTubePlayer.cueVideo(videoId,0);
+                }
 
             }
         });
